@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="flex w-full flex-wrap items-center justify-between gap-4">
-      <div className="text-3xl font-semibold text-[var(--accent)]">
+      <div className="text-4xl font-semibold text-[var(--accent)]">
         <span style={{ fontFamily: "var(--font-script)" }}>
           Berlinescots.de
         </span>
