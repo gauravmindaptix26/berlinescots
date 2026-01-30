@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
 
@@ -42,6 +42,14 @@ export default function HighClassPage() {
   const discretion = useCountUp(98, statsInView);
   const repeat = useCountUp(86, statsInView);
   const response = useCountUp(12, statsInView);
+
+  const detailRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress: detailProgress } = useScroll({
+    target: detailRef,
+    offset: ["start end", "end start"],
+  });
+  const detailY = useTransform(detailProgress, [0, 1], ["-6%", "6%"]);
+
   const [activeSlide, setActiveSlide] = useState(0);
   const demandSlides = [
     {
@@ -398,29 +406,81 @@ export default function HighClassPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.7, ease }}
-            className="rounded-[32px] bg-gradient-to-r from-[#fff7ee] via-[#f8f1e6] to-[#f6e5e7] p-10 shadow-[0_30px_80px_rgba(0,0,0,0.15)]"
+            className="space-y-8 border-t border-black/10 pt-12"
           >
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <div className="space-y-3">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-black/45">
+                  Refined Details
+                </p>
                 <h3 className="text-3xl font-semibold text-black">
-                  Ready for a discreet, premium evening?
+                  Sensual, understated, and composed
                 </h3>
+              </div>
+              <span className="text-sm font-semibold text-black/60">
+                Exclusivity in every detail
+              </span>
+            </div>
+            <div
+              ref={detailRef}
+              className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+            >
+              <div className="relative">
+                <motion.div
+                  style={{ y: detailY }}
+                  className="relative aspect-[4/5] overflow-hidden rounded-[30px] border border-black/10 bg-white shadow-[0_24px_60px_rgba(0,0,0,0.16)]"
+                >
+                  <Image
+                    src="/images/Frau in Body.jpg"
+                    alt="Refined detail"
+                    className="object-cover transition duration-500 hover:scale-105"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 520px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  transition={{ duration: 0.7, ease, delay: 0.08 }}
+                  className="absolute -right-10 top-12 hidden w-[46%] overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.14)] lg:block"
+                >
+                  <div className="relative aspect-[3/4]">
+                    <Image
+                      src="/images/Frau im schwarzen Kleid.jpg"
+                      alt="Elegant silhouette"
+                      className="object-cover transition duration-500 hover:scale-105"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 320px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                  </div>
+                </motion.div>
+              </div>
+              <div className="space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  transition={{ duration: 0.6, ease, delay: 0.12 }}
+                  className="relative aspect-[4/3] overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.14)]"
+                >
+                  <Image
+                    src="/images/Dame am Pool.jpg"
+                    alt="Soft atmosphere"
+                    className="object-cover transition duration-500 hover:scale-105"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                </motion.div>
                 <p className="text-base text-black/65">
-                  Share your preferences and we will curate an exclusive
-                  experience in Berlin.
+                  Soft lighting, refined presence, and a calm, confident rhythm
+                  create the emotional depth that defines our high-class
+                  experience.
                 </p>
               </div>
-              <motion.button
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.3, ease }}
-                className="group relative overflow-hidden rounded-full border border-[#c59c52]/50 bg-black px-8 py-3 text-sm font-semibold text-white"
-                type="button"
-              >
-                <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#d6b06b] via-[#c0764a] to-[#7a1f2c] opacity-45" />
-                </span>
-                <span className="relative">Request a VIP Session</span>
-              </motion.button>
             </div>
           </motion.section>
 
@@ -461,9 +521,7 @@ export default function HighClassPage() {
               ].map((item) => (
                 <div key={item.title} className="space-y-3">
                   <div className="h-[2px] w-10 bg-[#c59c52]" />
-                  <p className="text-lg font-semibold text-black">
-                    {item.title}
-                  </p>
+                  <p className="text-lg font-semibold text-black">{item.title}</p>
                   <p className="text-sm text-black/60">{item.copy}</p>
                 </div>
               ))}
@@ -498,9 +556,7 @@ export default function HighClassPage() {
                   className="h-full rounded-[24px] bg-transparent p-2"
                 >
                   <div className="mb-5 h-10 w-10 rounded-2xl bg-gradient-to-br from-[#d6b06b] via-[#c0764a] to-[#7a1f2c]" />
-                  <p className="text-xl font-semibold text-black">
-                    {card.title}
-                  </p>
+                  <p className="text-xl font-semibold text-black">{card.title}</p>
                   <p className="mt-3 text-sm text-black/65">{card.copy}</p>
                   <div className="mt-6 h-[1px] w-full bg-gradient-to-r from-black/10 via-black/25 to-transparent" />
                 </motion.div>
@@ -513,80 +569,29 @@ export default function HighClassPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.7, ease }}
-            className="space-y-8 border-t border-black/10 pt-12"
+            className="rounded-[32px] bg-gradient-to-r from-[#fff7ee] via-[#f8f1e6] to-[#f6e5e7] p-10 shadow-[0_30px_80px_rgba(0,0,0,0.15)]"
           >
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-black/45">
-                  Final Gallery
-                </p>
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <div className="space-y-3">
                 <h3 className="text-3xl font-semibold text-black">
-                  A closing impression of refined luxury
+                  Ready for a discreet, premium evening?
                 </h3>
+                <p className="text-base text-black/65">
+                  Share your preferences and we will curate an exclusive
+                  experience in Berlin.
+                </p>
               </div>
-              <span className="text-sm font-semibold text-black/60">
-                Curated, discreet, exclusive
-              </span>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-              <div className="relative">
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.35, ease }}
-                  className="relative aspect-[5/3] overflow-hidden rounded-[32px] border border-black/10 bg-white shadow-[0_28px_70px_rgba(0,0,0,0.18)]"
-                >
-                  <Image
-                    src="/images/Frauen in Limousine.jpeg"
-                    alt="Final luxury moment"
-                    className="object-cover transition duration-500 hover:scale-105"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 720px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                  <div className="absolute bottom-6 left-6 rounded-full border border-black/10 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-black/60">
-                    Signature Finale
-                  </div>
-                </motion.div>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.35, ease }}
-                  className="absolute -bottom-10 left-6 hidden w-[45%] overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-[0_22px_55px_rgba(0,0,0,0.16)] lg:block"
-                >
-                  <div className="relative aspect-[4/5]">
-                    <Image
-                      src="/images/Frau im schwarzen Kleid.jpg"
-                      alt="After-hours elegance"
-                      className="object-cover transition duration-500 hover:scale-105"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 360px"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                  </div>
-                </motion.div>
-              </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-                {[
-                  "/images/Frau in Body.jpg",
-                  "/images/Dame am Pool.jpg",
-                  "/images/Sexy Escort.png",
-                ].map((src) => (
-                  <motion.div
-                    key={src}
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.35, ease }}
-                    className="relative aspect-[4/5] overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.14)]"
-                  >
-                    <Image
-                      src={src}
-                      alt="High class gallery"
-                      className="object-cover transition duration-500 hover:scale-105"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 320px"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                  </motion.div>
-                ))}
-              </div>
+              <motion.button
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.3, ease }}
+                className="group relative overflow-hidden rounded-full border border-[#c59c52]/50 bg-black px-8 py-3 text-sm font-semibold text-white"
+                type="button"
+              >
+                <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#d6b06b] via-[#c0764a] to-[#7a1f2c] opacity-45" />
+                </span>
+                <span className="relative">Request a VIP Session</span>
+              </motion.button>
             </div>
           </motion.section>
         </main>
