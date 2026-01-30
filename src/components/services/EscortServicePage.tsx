@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
 
-const ease = [0.16, 1, 0.3, 1];
+const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function EscortServicePage() {
   const galleryRef = useRef<HTMLDivElement | null>(null);

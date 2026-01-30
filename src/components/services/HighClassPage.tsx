@@ -6,7 +6,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
 
-const ease = [0.16, 1, 0.3, 1];
+const ease = [0.16, 1, 0.3, 1] as const;
 
 function useCountUp(target: number, start: boolean, duration = 1400) {
   const [value, setValue] = useState(0);
