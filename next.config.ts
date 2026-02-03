@@ -20,6 +20,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true,
+  turbopack: {
+    root: __dirname,
+  },
   async headers() {
     return [
       {

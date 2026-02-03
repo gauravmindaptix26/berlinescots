@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 const LOCALES = ["de", "en"];
 const DEFAULT_LOCALE = "de";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/_next") || pathname.startsWith("/api")) {

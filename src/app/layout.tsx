@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Dancing_Script, Poppins } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "../i18n/LanguageProvider";
 
 const poppins = Poppins({
   variable: "--font-body",
@@ -46,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className={`${poppins.variable} ${dancingScript.variable}`}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
