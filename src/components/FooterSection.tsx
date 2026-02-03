@@ -3,7 +3,8 @@
 import { useTranslations } from "../i18n/LanguageProvider";
 
 export default function FooterSection() {
-  const { t } = useTranslations();
+  const { t, locale } = useTranslations();
+  const localePrefix = locale.startsWith("en") ? "/en" : "/de";
 
   const footerColumns = [
     {
@@ -60,10 +61,10 @@ export default function FooterSection() {
   ];
 
   const legalLinks = [
-    t("footer.legal1"),
-    t("footer.legal2"),
-    t("footer.legal3"),
-    t("footer.legal4"),
+    { label: t("footer.legal1"), href: `${localePrefix}/privacy` },
+    { label: t("footer.legal2"), href: `${localePrefix}/terms` },
+    { label: t("footer.legal3"), href: `${localePrefix}/cookies` },
+    { label: t("footer.legal4"), href: `${localePrefix}/booking-guidelines` },
   ];
 
   return (
@@ -124,7 +125,9 @@ export default function FooterSection() {
         <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/10 pt-6 text-sm text-white">
           <div className="flex flex-wrap items-center gap-6">
             {legalLinks.map((item) => (
-              <span key={item}>{item}</span>
+              <a key={item.label} href={item.href}>
+                {item.label}
+              </a>
             ))}
           </div>
           <div className="flex items-center gap-5 text-white">

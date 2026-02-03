@@ -21,10 +21,22 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
 
 const STORAGE_KEY = "bb-escort-locale";
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+export function LanguageProvider({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(
+    initialLocale ?? defaultLocale,
+  );
 
   useEffect(() => {
+    if (initialLocale && locales.includes(initialLocale)) {
+      setLocaleState(initialLocale);
+      return;
+    }
     const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
     if (saved && locales.includes(saved)) {
       setLocaleState(saved);

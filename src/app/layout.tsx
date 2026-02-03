@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Dancing_Script, Poppins } from "next/font/google";
 import "./globals.css";
-import { LanguageProvider } from "../i18n/LanguageProvider";
 
 const poppins = Poppins({
   variable: "--font-body",
@@ -16,12 +15,12 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Berlinescots - Discreet Elegance, Always Available",
+  title: "Berlinescots.de - Discreet Elegance, Always Available",
   description:
-    "Berlinescots connects you with carefully selected companions across Germany and Europe, delivering discreet, premium experiences.",
+    "Berlinescots.de connects you with carefully selected companions across Germany and Europe, delivering discreet, premium experiences.",
   metadataBase: new URL("https://berlinescots.de"),
   openGraph: {
-    title: "Berlinescots - Discreet Elegance, Always Available",
+    title: "Berlinescots.de - Discreet Elegance, Always Available",
     description:
       "Discreet, premium companionship with trusted, carefully selected companions across Germany and Europe.",
     type: "website",
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Berlinescots - Discreet Elegance, Always Available",
+    title: "Berlinescots.de - Discreet Elegance, Always Available",
     description:
       "Discreet, premium companionship with trusted, carefully selected companions across Germany and Europe.",
   },
@@ -45,9 +44,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="de">
       <body className={`${poppins.variable} ${dancingScript.variable}`}>
-        <LanguageProvider>{children}</LanguageProvider>
+        {children}
       </body>
     </html>
   );

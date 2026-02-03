@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { locales } from "../i18n/translations";
 import { useTranslations } from "../i18n/LanguageProvider";
 
@@ -12,10 +13,17 @@ export default function Header({
   const { locale, setLocale, t } = useTranslations();
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
   const isDark = tone === "dark";
   const dropdownItemClasses = `block rounded-lg px-3 py-2 transition ${
     isDark ? "hover:bg-white/10 hover:underline" : "hover:bg-black/5 hover:underline"
   }`;
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
@@ -47,7 +55,7 @@ export default function Header({
     >
       <div className="text-4xl font-semibold text-[var(--accent)]">
         <span style={{ fontFamily: "var(--font-script)" }}>
-          Berlinescots.de
+          EscortBerlin.de
         </span>
       </div>
       <nav
@@ -56,7 +64,7 @@ export default function Header({
         }`}
         aria-label="Primary"
       >
-        <a className={isDark ? "text-white/90" : "text-black"} href="#">
+        <a className={isDark ? "text-white/90" : "text-black"} href={`${localePrefix}/`}>
           {t("nav.home")}
         </a>
         <div
@@ -101,43 +109,43 @@ export default function Header({
           >
             <a
               className={dropdownItemClasses}
-              href="/services/escort-agentur-berlin"
+              href={`${localePrefix}/services/escort-agentur-berlin`}
               onClick={() => setServicesOpen(false)}
             >
               Escort Agentur Berlin
             </a>
             <a
               className={dropdownItemClasses}
-              href="/services/escort-service-berlin"
+              href={`${localePrefix}/services/escort-service-berlin`}
               onClick={() => setServicesOpen(false)}
             >
               Escort Service Berlin
             </a>
             <a
               className={dropdownItemClasses}
-              href="/services/high-class-escort-berlin"
+              href={`${localePrefix}/services/high-class-escort-berlin`}
               onClick={() => setServicesOpen(false)}
             >
               High Class Escort Berlin
             </a>
             <a
               className={dropdownItemClasses}
-              href="/services/escort-berlin-mitte"
+              href={`${localePrefix}/services/escort-berlin-mitte`}
               onClick={() => setServicesOpen(false)}
             >
               Escort Berlin Mitte
             </a>
             <a
               className={dropdownItemClasses}
-              href="/services/business-escort-berlin"
+              href={`${localePrefix}/services/business-escort-berlin`}
               onClick={() => setServicesOpen(false)}
             >
               Business Escort Berlin
             </a>
           </div>
         </div>
-        <a href="#">{t("nav.about")}</a>
-        <a href="#">{t("nav.contact")}</a>
+        <a href={`${localePrefix}/about`}>{t("nav.about")}</a>
+        <a href={`${localePrefix}/contact`}>{t("nav.contact")}</a>
       </nav>
       <div className="flex flex-wrap items-center gap-3">
         <label className="sr-only" htmlFor="language">
@@ -151,13 +159,18 @@ export default function Header({
               : "border-[var(--line)] bg-white text-black"
           }`}
           value={locale}
-          onChange={(event) => setLocale(event.target.value as (typeof locales)[number])}
+          onChange={(event) => {
+            const next = event.target.value as (typeof locales)[number];
+            setLocale(next);
+            const nextBase =
+              next.startsWith("en") ? "/en" : next.startsWith("de") ? "/de" : "/de";
+            const path = pathname ?? "/";
+            const stripped = path.replace(/^\/(en|de)(?=\/|$)/, "");
+            router.push(`${nextBase}${stripped || "/"}`);
+          }}
         >
-          <option value="en">English</option>
-          <option value="en-US">English (US)</option>
-          <option value="fr">French</option>
           <option value="de">German</option>
-          <option value="ru">Russian</option>
+          <option value="en">English</option>
         </select>
       </div>
     </header>
