@@ -5,13 +5,17 @@ import { defaultLocale, Locale, locales } from "../../../../i18n/translations";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [
-    { slug: "escort-agentur-berlin" },
-    { slug: "escort-service-berlin" },
-    { slug: "high-class-escort-berlin" },
-    { slug: "escort-berlin-mitte" },
-    { slug: "business-escort-berlin" },
+  const slugs = [
+    "escort-agentur-berlin",
+    "escort-service-berlin",
+    "high-class-escort-berlin",
+    "escort-berlin-mitte",
+    "business-escort-berlin",
   ];
+  const locales = ["de", "en"];
+  return locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug })),
+  );
 }
 
 const serviceMeta = {
