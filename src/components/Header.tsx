@@ -14,7 +14,7 @@ export default function Header({
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname();  
   const isDark = tone === "dark";
   const dropdownItemClasses = `block rounded-lg px-3 py-2 transition ${
     isDark ? "hover:bg-white/10 hover:underline" : "hover:bg-black/5 hover:underline"
