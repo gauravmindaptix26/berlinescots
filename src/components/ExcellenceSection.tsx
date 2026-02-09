@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
 const items = [
@@ -33,6 +35,12 @@ export default function ExcellenceSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [stride, setStride] = useState(0);
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   const updateStride = useCallback(() => {
     const container = scrollerRef.current;
@@ -149,21 +157,21 @@ export default function ExcellenceSection() {
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6 pt-4 text-base font-semibold">
-          <button
+          <Link
             className="rounded-full border border-black/15 bg-white px-7 py-3 text-black shadow-[0_8px_20px_rgba(0,0,0,0.08)]"
-            type="button"
+            href={`${localePrefix}/services/escort-service-berlin`}
           >
             {t("excellence.explore")}
-          </button>
-          <button
+          </Link>
+          <Link
             className="flex items-center gap-2 text-black/80"
-            type="button"
+            href={`${localePrefix}/about`}
           >
             {t("excellence.learn")}
             <span aria-hidden="true" className="text-lg">
               -&gt;
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

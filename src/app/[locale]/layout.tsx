@@ -20,8 +20,8 @@ export default async function LocaleLayout({
     : defaultLocale;
 
   const isEn = safeLocale.startsWith("en");
-  const orgName = "Berlinescots.de";
-  const siteUrl = `https://berlinescots.de/${safeLocale}`;
+  const orgName = "EscortBerlin.de";
+  const siteUrl = `https://escortberlin.de/${safeLocale}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -47,3 +47,4 @@ export default async function LocaleLayout({
     </>
   );
 }
+

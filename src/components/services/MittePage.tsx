@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useInView } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
@@ -37,6 +39,12 @@ function useCountUp(target: number, start: boolean, duration = 1400) {
 }
 
 export default function MittePage() {
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
   const statsRef = useRef<HTMLDivElement | null>(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-10% 0px" });
   const discretion = useCountUp(96, statsInView);
@@ -88,25 +96,21 @@ export default function MittePage() {
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
-                  <motion.button
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.3, ease }}
-                    className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
-                    type="button"
+                  <Link
+                    className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(0,0,0,0.2)] transition hover:-translate-y-0.5"
+                    href={`${localePrefix}/booking-guidelines`}
                   >
                     <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
                       <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-55" />
                     </span>
                     <span className="relative">Request Mitte Escort</span>
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.3, ease }}
-                    className="rounded-full border border-black/10 bg-white px-7 py-3 text-sm font-semibold text-black/70"
-                    type="button"
+                  </Link>
+                  <Link
+                    className="rounded-full border border-black/10 bg-white px-7 py-3 text-sm font-semibold text-black/70 transition hover:-translate-y-0.5"
+                    href={`${localePrefix}/contact`}
                   >
                     Speak to Concierge
-                  </motion.button>
+                  </Link>
                 </div>
                 <div className="flex flex-wrap gap-8 pt-4 text-sm font-semibold text-black/60">
                   <span>Confidential</span>
@@ -437,17 +441,15 @@ export default function MittePage() {
                   team will curate a premium experience.
                 </p>
               </div>
-              <motion.button
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.3, ease }}
-                className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-8 py-3 text-sm font-semibold text-white"
-                type="button"
+              <Link
+                className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                href={`${localePrefix}/booking-guidelines`}
               >
                 <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
                   <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-55" />
                 </span>
                 <span className="relative">Request a VIP Session</span>
-              </motion.button>
+              </Link>
             </div>
           </motion.section>
         </main>

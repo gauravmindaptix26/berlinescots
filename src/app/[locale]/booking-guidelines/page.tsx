@@ -18,9 +18,9 @@ export async function generateMetadata({
   const safeLocale = getLocale(locale);
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Booking Guidelines | Berlinescots.de",
+      title: "Booking Guidelines | EscortBerlin.de",
       description:
-        "Read the booking guidelines for Berlinescots.de to ensure a discreet and professional inquiry.",
+        "Read the booking guidelines for EscortBerlin.de to ensure a discreet and professional inquiry.",
       alternates: {
         canonical: "/en/booking-guidelines",
         languages: {
@@ -31,9 +31,9 @@ export async function generateMetadata({
     };
   }
   return {
-    title: "Buchungsrichtlinien | Berlinescots.de",
+    title: "Buchungsrichtlinien | EscortBerlin.de",
     description:
-      "Lesen Sie die Buchungsrichtlinien von Berlinescots.de für eine diskrete und professionelle Anfrage.",
+      "Lesen Sie die Buchungsrichtlinien von EscortBerlin.de für eine diskrete und professionelle Anfrage.",
     alternates: {
       canonical: "/de/booking-guidelines",
       languages: {
@@ -77,3 +77,4 @@ export default async function BookingGuidelinesPage({
     </div>
   );
 }
+

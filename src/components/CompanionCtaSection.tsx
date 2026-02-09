@@ -1,10 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
 export default function CompanionCtaSection() {
   const { t } = useTranslations();
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   return (
     <section className="perf-section bg-[var(--shell)] py-20 sm:py-24">
@@ -20,18 +29,18 @@ export default function CompanionCtaSection() {
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <button
+          <Link
             className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(207,31,109,0.35)]"
-            type="button"
+            href={`${localePrefix}/booking-guidelines`}
           >
             {t("cta.book")}
-          </button>
-          <button
+          </Link>
+          <Link
             className="rounded-full border border-[var(--line)] bg-white px-6 py-2.5 text-sm font-semibold text-black/80"
-            type="button"
+            href={`${localePrefix}/contact`}
           >
             {t("cta.contact")}
-          </button>
+          </Link>
         </div>
         <div className="w-full overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.18)]">
           <div className="relative aspect-[16/9] w-full sm:aspect-[16/8]">

@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
@@ -9,6 +11,12 @@ import FooterSection from "../FooterSection";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function BusinessPage() {
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const [dragWidth, setDragWidth] = useState(0);
   const ctaRef = useRef<HTMLDivElement | null>(null);
@@ -73,25 +81,21 @@ export default function BusinessPage() {
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
-                  <motion.button
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.3, ease }}
-                    className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(0,0,0,0.4)]"
-                    type="button"
+                  <Link
+                    className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5"
+                    href={`${localePrefix}/booking-guidelines`}
                   >
                     <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
                       <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-55" />
                     </span>
                     <span className="relative">Request Executive Support</span>
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.3, ease }}
-                    className="rounded-full border border-white/20 bg-white/10 px-7 py-3 text-sm font-semibold text-white/80"
-                    type="button"
+                  </Link>
+                  <Link
+                    className="rounded-full border border-white/20 bg-white/10 px-7 py-3 text-sm font-semibold text-white/80 transition hover:-translate-y-0.5"
+                    href={`${localePrefix}/contact`}
                   >
                     Speak to Concierge
-                  </motion.button>
+                  </Link>
                 </div>
               </div>
               <div className="relative h-[360px] sm:h-[420px]">
@@ -353,17 +357,15 @@ export default function BusinessPage() {
                   will respond with a tailored, discreet plan.
                 </p>
               </div>
-              <motion.button
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.3, ease }}
-                className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-8 py-3 text-sm font-semibold text-white"
-                type="button"
+              <Link
+                className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                href={`${localePrefix}/booking-guidelines`}
               >
                 <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
                   <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-55" />
                 </span>
                 <span className="relative">Book Executive Session</span>
-              </motion.button>
+              </Link>
             </div>
           </motion.section>
 
@@ -397,17 +399,15 @@ export default function BusinessPage() {
                 environments. We coordinate refined, confidential companionship
                 for corporate and diplomatic settings in Berlin.
               </p>
-              <motion.button
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.3, ease }}
-                className="group relative w-fit overflow-hidden rounded-full border border-[#f2a3bf]/60 bg-black/70 px-8 py-3 text-sm font-semibold text-white"
-                type="button"
+              <Link
+                className="group relative w-fit overflow-hidden rounded-full border border-[#f2a3bf]/60 bg-black/70 px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                href={`${localePrefix}/booking-guidelines`}
               >
                 <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
                   <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-60" />
                 </span>
                 <span className="relative">Secure Executive Booking</span>
-              </motion.button>
+              </Link>
             </div>
           </motion.section>
         </main>

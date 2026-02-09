@@ -18,9 +18,9 @@ export async function generateMetadata({
 
   if (safeLocale.startsWith("en")) {
     return {
-      title: "About Berlinescots.de | Discreet Luxury Companionship",
+      title: "About EscortBerlin.de | Discreet Luxury Companionship",
       description:
-        "Discover Berlinescots.de: a Germany‑based luxury companionship studio focused on discretion, refinement, and premium concierge care.",
+        "Discover EscortBerlin.de: a Germany‑based luxury companionship studio focused on discretion, refinement, and premium concierge care.",
       alternates: {
         canonical: "/en/about",
         languages: {
@@ -32,9 +32,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Über Berlinescots.de | Diskrete Luxusbegleitung",
+    title: "Über EscortBerlin.de | Diskrete Luxusbegleitung",
     description:
-      "Erfahren Sie mehr über Berlinescots.de: eine deutsche Luxusbegleitung mit Fokus auf Diskretion, Stil und professionellem Concierge‑Service.",
+      "Erfahren Sie mehr über EscortBerlin.de: eine deutsche Luxusbegleitung mit Fokus auf Diskretion, Stil und professionellem Concierge‑Service.",
     alternates: {
       canonical: "/de/about",
       languages: {
@@ -48,3 +48,4 @@ export async function generateMetadata({
 export default function LocaleAboutPage() {
   return <AboutPage />;
 }
+

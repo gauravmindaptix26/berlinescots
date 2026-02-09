@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://berlinescots.de/sitemap.xml",
+    sitemap: "https://escortberlin.de/sitemap.xml",
   };
 }
+

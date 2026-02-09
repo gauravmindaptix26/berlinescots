@@ -18,9 +18,9 @@ export async function generateMetadata({
   const safeLocale = getLocale(locale);
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Cookie Settings | Berlinescots.de",
+      title: "Cookie Settings | EscortBerlin.de",
       description:
-        "Manage cookie preferences for Berlinescots.de and learn how we use cookies for site functionality.",
+        "Manage cookie preferences for EscortBerlin.de and learn how we use cookies for site functionality.",
       alternates: {
         canonical: "/en/cookies",
         languages: {
@@ -31,9 +31,9 @@ export async function generateMetadata({
     };
   }
   return {
-    title: "Cookie Einstellungen | Berlinescots.de",
+    title: "Cookie Einstellungen | EscortBerlin.de",
     description:
-      "Verwalten Sie Cookie‑Einstellungen für Berlinescots.de und erfahren Sie mehr über die Nutzung von Cookies.",
+      "Verwalten Sie Cookie‑Einstellungen für EscortBerlin.de und erfahren Sie mehr über die Nutzung von Cookies.",
     alternates: {
       canonical: "/de/cookies",
       languages: {
@@ -77,3 +77,4 @@ export default async function CookiesPage({
     </div>
   );
 }
+

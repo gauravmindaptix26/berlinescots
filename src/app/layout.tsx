@@ -16,20 +16,20 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Berlinescots.de - Discreet Elegance, Always Available",
+  title: "EscortBerlin.de - Discreet Elegance, Always Available",
   description:
-    "Berlinescots.de connects you with carefully selected companions across Germany and Europe, delivering discreet, premium experiences.",
-  metadataBase: new URL("https://berlinescots.de"),
+    "EscortBerlin.de connects you with carefully selected companions across Germany and Europe, delivering discreet, premium experiences.",
+  metadataBase: new URL("https://escortberlin.de"),
   openGraph: {
-    title: "Berlinescots.de - Discreet Elegance, Always Available",
+    title: "EscortBerlin.de - Discreet Elegance, Always Available",
     description:
       "Discreet, premium companionship with trusted, carefully selected companions across Germany and Europe.",
     type: "website",
-    url: "https://berlinescots.de",
+    url: "https://escortberlin.de",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Berlinescots.de - Discreet Elegance, Always Available",
+    title: "EscortBerlin.de - Discreet Elegance, Always Available",
     description:
       "Discreet, premium companionship with trusted, carefully selected companions across Germany and Europe.",
   },
@@ -52,3 +52,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
 const faqs = [
@@ -27,6 +30,12 @@ const faqs = [
 
 export default function FaqSection() {
   const { t } = useTranslations();
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   return (
     <section className="perf-section bg-[var(--shell)] py-20 sm:py-24">
@@ -58,12 +67,12 @@ export default function FaqSection() {
           <p className="text-base text-black sm:text-lg">
             {t("faq.helpCopy")}
           </p>
-          <button
+          <Link
             className="rounded-full border border-[var(--line)] bg-white px-6 py-2.5 text-sm font-semibold text-black/80"
-            type="button"
+            href={`${localePrefix}/contact`}
           >
             {t("hero.contact")}
-          </button>
+          </Link>
         </div>
       </div>
     </section>

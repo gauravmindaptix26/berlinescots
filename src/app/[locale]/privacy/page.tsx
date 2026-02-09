@@ -18,9 +18,9 @@ export async function generateMetadata({
   const safeLocale = getLocale(locale);
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Privacy Policy | Berlinescots.de",
+      title: "Privacy Policy | EscortBerlin.de",
       description:
-        "Read how Berlinescots.de protects your privacy and handles confidential information with care.",
+        "Read how EscortBerlin.de protects your privacy and handles confidential information with care.",
       alternates: {
         canonical: "/en/privacy",
         languages: {
@@ -31,9 +31,9 @@ export async function generateMetadata({
     };
   }
   return {
-    title: "Datenschutz | Berlinescots.de",
+    title: "Datenschutz | EscortBerlin.de",
     description:
-      "Erfahren Sie, wie Berlinescots.de Ihre Privatsphäre schützt und Informationen diskret behandelt.",
+      "Erfahren Sie, wie EscortBerlin.de Ihre Privatsphäre schützt und Informationen diskret behandelt.",
     alternates: {
       canonical: "/de/privacy",
       languages: {
@@ -77,3 +77,4 @@ export default async function PrivacyPage({
     </div>
   );
 }
+

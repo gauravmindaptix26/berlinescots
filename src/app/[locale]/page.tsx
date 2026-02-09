@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Berlinescots.de | Discreet German Luxury Companionship",
+      title: "EscortBerlin.de | Discreet German Luxury Companionship",
       description:
         "Premium companionship across Germany with discreet, professional coordination. Explore curated services, refined experiences, and concierge support.",
       alternates: {
@@ -32,7 +32,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Berlinescots.de | Diskrete Luxusbegleitung in Deutschland",
+    title: "EscortBerlin.de | Diskrete Luxusbegleitung in Deutschland",
     description:
       "Premium Begleitung in ganz Deutschland mit diskreter, professioneller Koordination. Entdecken Sie kuratierte Services, elegante Erlebnisse und Concierge‑Support.",
     alternates: {
@@ -48,3 +48,4 @@ export async function generateMetadata({
 export default function LocaleHome() {
   return <Home />;
 }
+

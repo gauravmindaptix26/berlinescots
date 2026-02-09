@@ -19,10 +19,23 @@ body {
   background: var(--shell);
   color: var(--ink);
   font-family: var(--font-body), sans-serif;
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 a {

@@ -18,9 +18,9 @@ export async function generateMetadata({
   const safeLocale = getLocale(locale);
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Terms of Service | Berlinescots.de",
+      title: "Terms of Service | EscortBerlin.de",
       description:
-        "Review the terms of service for using Berlinescots.de and our premium concierge communications.",
+        "Review the terms of service for using EscortBerlin.de and our premium concierge communications.",
       alternates: {
         canonical: "/en/terms",
         languages: {
@@ -31,9 +31,9 @@ export async function generateMetadata({
     };
   }
   return {
-    title: "Nutzungsbedingungen | Berlinescots.de",
+    title: "Nutzungsbedingungen | EscortBerlin.de",
     description:
-      "Lesen Sie die Nutzungsbedingungen für die Nutzung von Berlinescots.de und unseren Concierge‑Service.",
+      "Lesen Sie die Nutzungsbedingungen für die Nutzung von EscortBerlin.de und unseren Concierge‑Service.",
     alternates: {
       canonical: "/de/terms",
       languages: {
@@ -77,3 +77,4 @@ export default async function TermsPage({
     </div>
   );
 }
+

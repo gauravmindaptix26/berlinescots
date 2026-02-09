@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
 const cards = [
@@ -40,6 +42,12 @@ export default function SelectionSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [stride, setStride] = useState(0);
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   const updateStride = useCallback(() => {
     const container = scrollerRef.current;
@@ -93,12 +101,12 @@ export default function SelectionSection() {
               {t("selection.copy")}
             </p>
           </div>
-          <button
+          <Link
             className="rounded-full border border-white/30 px-6 py-2 text-sm font-semibold text-white"
-            type="button"
+            href={`${localePrefix}/services/escort-service-berlin`}
           >
             {t("selection.viewAll")}
-          </button>
+          </Link>
         </div>
         <div
           ref={scrollerRef}

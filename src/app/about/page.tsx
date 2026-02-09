@@ -105,7 +105,7 @@ export default function AboutPage() {
                 Who We Are
               </h1>
               <p className="fade-in-up text-lg text-white/90 drop-shadow-[0_10px_22px_rgba(0,0,0,0.6)] sm:text-xl">
-                Berlinescots.de is a Germany-based luxury companionship studio
+                EscortBerlin.de is a Germany-based luxury companionship studio
                 delivering discreet, elegant, and impeccably curated experiences.
                 We focus on privacy, professionalism, and a refined journey built
                 around your comfort.
@@ -341,3 +341,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

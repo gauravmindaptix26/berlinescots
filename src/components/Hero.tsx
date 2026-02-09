@@ -1,10 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
 export default function Hero() {
   const { t } = useTranslations();
+  const pathname = usePathname();
+  const localePrefix = useMemo(() => {
+    if (pathname?.startsWith("/en")) return "/en";
+    if (pathname?.startsWith("/de")) return "/de";
+    return "/de";
+  }, [pathname]);
 
   return (
     <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_1.25fr]">
@@ -18,18 +27,18 @@ export default function Hero() {
           {t("hero.copy")}
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <button
+          <Link
             className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-base font-semibold text-white shadow-[0_10px_25px_rgba(207,31,109,0.35)]"
-            type="button"
+            href={`${localePrefix}/services/escort-service-berlin`}
           >
             {t("hero.browse")}
-          </button>
-          <button
+          </Link>
+          <Link
             className="rounded-full border border-[var(--line)] bg-white px-7 py-3 text-base font-semibold text-black/80"
-            type="button"
+            href={`${localePrefix}/contact`}
           >
             {t("hero.contact")}
-          </button>
+          </Link>
         </div>
       </div>
       <div className="grid gap-6 sm:grid-cols-[1.2fr_0.8fr]">

@@ -82,6 +82,7 @@ const gallerySlides = [
 export default function ContactPage() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeMethod, setActiveMethod] = useState(0);
+  const contactEmail = "contact@escortberlin.de";
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
@@ -252,7 +253,25 @@ export default function ContactPage() {
               A calm, discreet form designed for privacy-first communication. We
               reply quickly and professionally.
             </p>
-            <form className="mt-4 grid gap-4">
+            <form
+              className="mt-4 grid gap-4"
+              onSubmit={(event) => {
+                event.preventDefault();
+                const form = event.currentTarget;
+                const data = new FormData(form);
+                const name = String(data.get("name") ?? "");
+                const email = String(data.get("email") ?? "");
+                const preferred = String(data.get("preferred") ?? "");
+                const message = String(data.get("message") ?? "");
+                const subject = encodeURIComponent(
+                  `Website inquiry${name ? ` - ${name}` : ""}`
+                );
+                const body = encodeURIComponent(
+                  `Name: ${name}\nEmail: ${email}\nPreferred: ${preferred}\n\n${message}`
+                );
+                window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+              }}
+            >
               <input
                 className="h-12 rounded-2xl border border-[#f3c9d8] bg-white px-4 text-sm text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-[#f0a7c1]"
                 placeholder="Your name"
@@ -285,7 +304,7 @@ export default function ContactPage() {
               />
               <button
                 className="mt-2 h-12 rounded-full bg-[#d96995] text-sm font-semibold text-white shadow-[0_16px_35px_rgba(214,105,149,0.35)] transition duration-300 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(214,105,149,0.45)]"
-                type="button"
+                type="submit"
               >
                 Send Secure Request
               </button>

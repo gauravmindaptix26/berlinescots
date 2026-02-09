@@ -5,57 +5,54 @@ import { useTranslations } from "../i18n/LanguageProvider";
 export default function FooterSection() {
   const { t, locale } = useTranslations();
   const localePrefix = locale.startsWith("en") ? "/en" : "/de";
+  const isEn = locale.startsWith("en");
 
   const footerColumns = [
     {
-      title: t("footer.col1"),
+      title: isEn ? "Services" : "Services",
       items: [
-        t("footer.col1.item1"),
-        t("footer.col1.item2"),
-        t("footer.col1.item3"),
-        t("footer.col1.item4"),
-        t("footer.col1.item5"),
+        {
+          label: isEn ? "Escort Agency Berlin" : "Escort Agentur Berlin",
+          href: `${localePrefix}/services/escort-agentur-berlin`,
+        },
+        {
+          label: isEn ? "Escort Service Berlin" : "Escort Service Berlin",
+          href: `${localePrefix}/services/escort-service-berlin`,
+        },
+        {
+          label: isEn ? "High Class Escort Berlin" : "High Class Escort Berlin",
+          href: `${localePrefix}/services/high-class-escort-berlin`,
+        },
+        {
+          label: isEn ? "Escort Berlin Mitte" : "Escort Berlin Mitte",
+          href: `${localePrefix}/services/escort-berlin-mitte`,
+        },
+        {
+          label: isEn ? "Business Escort Berlin" : "Business Escort Berlin",
+          href: `${localePrefix}/services/business-escort-berlin`,
+        },
       ],
     },
     {
-      title: t("footer.col2"),
+      title: isEn ? "Company" : "Unternehmen",
       items: [
-        t("footer.col2.item1"),
-        t("footer.col2.item2"),
-        t("footer.col2.item3"),
-        t("footer.col2.item4"),
-        t("footer.col2.item5"),
+        { label: isEn ? "About" : "Über uns", href: `${localePrefix}/about` },
+        {
+          label: isEn ? "Contact" : "Kontakt",
+          href: `${localePrefix}/contact`,
+        },
+        {
+          label: isEn ? "Booking Guidelines" : "Buchungsrichtlinien",
+          href: `${localePrefix}/booking-guidelines`,
+        },
       ],
     },
     {
-      title: t("footer.col3"),
-      horizontal: true,
+      title: isEn ? "Legal" : "Rechtliches",
       items: [
-        t("footer.col3.item1"),
-        t("footer.col3.item2"),
-        t("footer.col3.item3"),
-        t("footer.col3.item4"),
-        t("footer.col3.item5"),
-      ],
-    },
-    {
-      title: t("footer.col4"),
-      items: [
-        t("footer.col4.item1"),
-        t("footer.col4.item2"),
-        t("footer.col4.item3"),
-        t("footer.col4.item4"),
-        t("footer.col4.item5"),
-      ],
-    },
-    {
-      title: t("footer.col5"),
-      items: [
-        t("footer.col5.item1"),
-        t("footer.col5.item2"),
-        t("footer.col5.item3"),
-        t("footer.col5.item4"),
-        t("footer.col5.item5"),
+        { label: t("footer.legal1"), href: `${localePrefix}/privacy` },
+        { label: t("footer.legal2"), href: `${localePrefix}/terms` },
+        { label: t("footer.legal3"), href: `${localePrefix}/cookies` },
       ],
     },
   ];
@@ -70,52 +67,30 @@ export default function FooterSection() {
   return (
     <footer className="perf-section bg-black py-16 text-white">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-12 px-6 sm:px-10 lg:px-16">
-        <div className="flex flex-wrap items-center justify-between gap-6">
-          <div className="space-y-3">
-            <p className="text-xl font-semibold text-white">
-              {t("footer.stayTitle")}
-            </p>
-            <p className="text-base text-white">{t("footer.stayCopy")}</p>
-          </div>
-          <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
-            <input
-              className="h-12 flex-1 rounded-full border border-white/20 bg-black px-4 text-sm text-white placeholder:text-white/50 sm:w-80"
-              placeholder={t("footer.email")}
-              type="email"
-              aria-label="Email address"
-            />
-            <button
-              className="h-12 rounded-full border border-white/20 bg-black px-6 text-sm font-semibold text-white"
-              type="button"
-            >
-              {t("footer.subscribe")}
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <p className="text-sm text-white">{t("footer.privacyNote")}</p>
-        </div>
         <div className="grid gap-10 border-t border-white/10 pt-10 lg:grid-cols-[0.6fr_3.4fr]">
           <div className="text-2xl font-semibold text-[var(--accent)]">
             <span style={{ fontFamily: "var(--font-script)" }}>
-              Berlinescots.de
+              EscortBerlin.de
             </span>
+            <p className="mt-3 text-sm font-normal text-white/80">
+              {isEn
+                ? "Discreet, premium companionship curated for Berlin."
+                : "Diskrete Premium-Begleitung, kuratiert für Berlin."}
+            </p>
           </div>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {footerColumns.map((column) => (
               <div key={column.title} className="space-y-4 text-sm">
                 <p className="text-lg font-semibold text-white">
                   {column.title}
                 </p>
-                <ul
-                  className={
-                    column.horizontal
-                      ? "flex flex-wrap gap-x-6 gap-y-2 text-base text-white"
-                      : "space-y-3 text-base text-white"
-                  }
-                >
+                <ul className="space-y-3 text-base text-white">
                   {column.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item.label}>
+                      <a className="cursor-pointer" href={item.href}>
+                        {item.label}
+                      </a>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -125,18 +100,12 @@ export default function FooterSection() {
         <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/10 pt-6 text-sm text-white">
           <div className="flex flex-wrap items-center gap-6">
             {legalLinks.map((item) => (
-              <a key={item.label} href={item.href}>
+              <a key={item.label} className="cursor-pointer" href={item.href}>
                 {item.label}
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-5 text-white">
-            <span className="text-base font-semibold">FB</span>
-            <span className="text-base font-semibold">IG</span>
-            <span className="text-base font-semibold">X</span>
-            <span className="text-base font-semibold">IN</span>
-            <span className="text-base font-semibold">YT</span>
-          </div>
+          <div className="text-white/70">© 2025 EscortBerlin.de</div>
         </div>
       </div>
     </footer>

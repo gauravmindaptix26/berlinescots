@@ -18,9 +18,9 @@ export async function generateMetadata({
 
   if (safeLocale.startsWith("en")) {
     return {
-      title: "Contact Berlinescots.de | Discreet Premium Concierge",
+      title: "Contact EscortBerlin.de | Discreet Premium Concierge",
       description:
-        "Contact Berlinescots.de for discreet, premium communication. Choose your preferred channel and connect with our concierge team.",
+        "Contact EscortBerlin.de for discreet, premium communication. Choose your preferred channel and connect with our concierge team.",
       alternates: {
         canonical: "/en/contact",
         languages: {
@@ -32,9 +32,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Kontakt Berlinescots.de | Diskreter Premium‑Concierge",
+    title: "Kontakt EscortBerlin.de | Diskreter Premium‑Concierge",
     description:
-      "Kontaktieren Sie Berlinescots.de für diskrete, hochwertige Kommunikation. Wählen Sie Ihren bevorzugten Kanal und sprechen Sie mit unserem Concierge.",
+      "Kontaktieren Sie EscortBerlin.de für diskrete, hochwertige Kommunikation. Wählen Sie Ihren bevorzugten Kanal und sprechen Sie mit unserem Concierge.",
     alternates: {
       canonical: "/de/contact",
       languages: {
@@ -48,3 +48,4 @@ export async function generateMetadata({
 export default function LocaleContactPage() {
   return <ContactPage />;
 }
+
