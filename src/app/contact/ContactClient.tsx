@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import FooterSection from "../../components/FooterSection";
 
 const contactImages = {
-  hero: "/images/Frau bringt Mann FrÃ¼hstÃ¼ck.jpg",
+  hero: "/images/Frau bringt Mann Frühstück.jpg",
   form: "/images/Frau im schwarzen Kleid.jpg",
   city: "/images/Frauen in Limousine.jpeg",
   lounge: "/images/Frau auf Sessel.jpg",

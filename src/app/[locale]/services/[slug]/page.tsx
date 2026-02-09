@@ -90,9 +90,9 @@ function getLocale(locale: string): Locale {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: keyof typeof serviceMeta };
+  params: Promise<{ locale: string; slug: keyof typeof serviceMeta }>;
 }): Promise<Metadata> {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   const safeLocale = getLocale(locale);
   const meta = serviceMeta[slug];
   if (!meta) return {};
@@ -110,14 +110,11 @@ export async function generateMetadata({
   };
 }
 
-export default function LocaleServicePage({
+export default async function LocaleServicePage({
   params,
 }: {
-  params: { slug: string; locale: string };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug, locale } = params;
-  return (
-    <ServicePage params={Promise.resolve({ slug, locale })} />
-  );
+  return <ServicePage params={params} />;
 }
 

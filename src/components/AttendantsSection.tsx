@@ -98,10 +98,12 @@ export default function AttendantsSection({
     <section className="fade-in-up space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/45">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/50">
             {subtitle}
           </p>
-          <h3 className="text-3xl font-semibold text-black">{title}</h3>
+          <h3 className="text-4xl font-semibold text-black sm:text-5xl">
+            {title}
+          </h3>
         </div>
       </div>
 
