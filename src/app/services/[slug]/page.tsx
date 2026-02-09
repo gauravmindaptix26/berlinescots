@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import Header from "../../../components/Header";
 import FooterSection from "../../../components/FooterSection";
 import AttendantsSection from "../../../components/AttendantsSection";
@@ -624,10 +625,12 @@ export default async function ServicePage({
             </div>
           </section>
 
-          <AttendantsSection
-            title="Profiles available now"
-            subtitle="Verified attendants from our concierge"
-          />
+          <Suspense fallback={<div className="rounded-2xl border border-black/10 bg-white p-6 text-sm text-black/60">Loading profiles…</div>}>
+            <AttendantsSection
+              title="Profiles available now"
+              subtitle="Verified attendants from our concierge"
+            />
+          </Suspense>
 
           <section
             className="fade-in-up rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_22px_50px_rgba(0,0,0,0.1)] lg:p-12"

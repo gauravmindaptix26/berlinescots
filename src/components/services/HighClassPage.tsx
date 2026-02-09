@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { Suspense } from "react";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
 import AttendantsSection from "../AttendantsSection";
@@ -569,10 +570,18 @@ export default function HighClassPage() {
             ))}
           </motion.section>
 
-          <AttendantsSection
-            title="Profiles available now"
-            subtitle="Verified attendants from our concierge"
-          />
+          <Suspense
+            fallback={
+              <div className="rounded-2xl border border-black/10 bg-white p-6 text-sm text-black/60">
+                Loading profiles…
+              </div>
+            }
+          >
+            <AttendantsSection
+              title="Profiles available now"
+              subtitle="Verified attendants from our concierge"
+            />
+          </Suspense>
 
           <motion.section
             initial={{ opacity: 0, y: 20 }}

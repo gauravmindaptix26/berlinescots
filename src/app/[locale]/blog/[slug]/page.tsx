@@ -20,9 +20,9 @@ function getLocale(locale: string): Locale {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string; slug: string }>;
+  params: { locale: string; slug: string };
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale, slug } = params;
   const safeLocale = getLocale(locale);
   const post = blogPosts.find((item) => item.slug === slug);
   if (!post) return {};
@@ -39,8 +39,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleBlogPostPage(props: {
-  params: Promise<{ slug: string }>;
+export default function LocaleBlogPostPage({
+  params,
+}: {
+  params: { locale: string; slug: string };
 }) {
-  return <BlogPostPage {...props} />;
+  return <BlogPostPage params={{ slug: params.slug }} />;
 }

@@ -103,13 +103,27 @@ export default function SelectionSection() {
   const scrollToIndex = (index: number) => {
     const container = scrollerRef.current;
     if (!container || !stride) return;
-    const boundedIndex = Math.max(0, Math.min(index, cards.length - 1));
+    const items = attendants.length ? attendants : fallbackCards;
+    const boundedIndex = Math.max(0, Math.min(index, items.length - 1));
     container.scrollTo({
       left: stride * boundedIndex,
       behavior: "smooth",
     });
     setActiveIndex(boundedIndex);
   };
+
+  type FallbackCard = (typeof fallbackCards)[number];
+  type AttendantCard = {
+    id: string;
+    name: string;
+    age: number;
+    distance?: string;
+    defaultMedia?: { xs?: string; lg?: string; blurThumbnail?: string | null };
+  };
+  type CardItem = FallbackCard | AttendantCard;
+
+  const isAttendantCard = (card: CardItem): card is AttendantCard =>
+    "defaultMedia" in card;
 
   return (
     <section className="perf-section w-full bg-black py-14 text-white sm:py-16 lg:py-20">
@@ -141,19 +155,22 @@ export default function SelectionSection() {
           className="no-scrollbar flex gap-6 overflow-x-auto scroll-smooth pb-6 pt-2"
         >
           {(attendants.length ? attendants : fallbackCards).map((card) => {
-            const image =
-              "defaultMedia" in card ? card.defaultMedia?.lg || card.defaultMedia?.xs : card.src;
-            const blur =
-              "defaultMedia" in card ? card.defaultMedia?.blurThumbnail ?? undefined : undefined;
-            const title =
-              "name" in card ? `${card.name}, ${card.age}` : t(card.titleKey);
+            const image = isAttendantCard(card)
+              ? card.defaultMedia?.lg || card.defaultMedia?.xs
+              : card.src;
+            const blur = isAttendantCard(card)
+              ? card.defaultMedia?.blurThumbnail ?? undefined
+              : undefined;
+            const title = isAttendantCard(card)
+              ? `${card.name}, ${card.age}`
+              : t(card.titleKey);
             const subtitle =
-              "distance" in card && card.distance
+              isAttendantCard(card) && card.distance
                 ? `Distance ${card.distance} km`
                 : t("selection.available");
             return (
               <article
-                key={"id" in card ? card.id : card.id}
+                key={card.id}
                 data-card="true"
                 className="min-w-[260px] shrink-0 space-y-4 rounded-[24px] bg-black sm:min-w-[300px] lg:min-w-[320px]"
               >
