@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
+import AttendantsSection from "../AttendantsSection";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -567,6 +568,11 @@ export default function HighClassPage() {
               </div>
             ))}
           </motion.section>
+
+          <AttendantsSection
+            title="Profiles available now"
+            subtitle="Verified attendants from our concierge"
+          />
 
           <motion.section
             initial={{ opacity: 0, y: 20 }}

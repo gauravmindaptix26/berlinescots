@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import Header from "../../components/Header";
 import FooterSection from "../../components/FooterSection";
 
@@ -83,6 +84,19 @@ export default function ContactPage() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeMethod, setActiveMethod] = useState(0);
   const contactEmail = "contact@escortberlin.de";
+  const searchParams = useSearchParams();
+  const attendantName = searchParams.get("attendant") ?? "";
+  const attendantSlug = searchParams.get("slug") ?? "";
+  const attendantId = searchParams.get("id") ?? "";
+  const defaultMessage = useMemo(() => {
+    if (!attendantName && !attendantSlug && !attendantId) return "";
+    const parts = [
+      attendantName ? `Name: ${attendantName}` : null,
+      attendantSlug ? `Slug: ${attendantSlug}` : null,
+      attendantId ? `ID: ${attendantId}` : null,
+    ].filter(Boolean);
+    return `I want to book this attendant.\n${parts.join(" | ")}\n\n`;
+  }, [attendantId, attendantName, attendantSlug]);
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
@@ -272,6 +286,11 @@ export default function ContactPage() {
                 window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
               }}
             >
+              {attendantName || attendantSlug || attendantId ? (
+                <div className="rounded-2xl border border-[#f3c9d8] bg-white/80 px-4 py-3 text-xs uppercase tracking-[0.25em] text-[#d96995]">
+                  Booking request for {attendantName || attendantSlug || attendantId}
+                </div>
+              ) : null}
               <input
                 className="h-12 rounded-2xl border border-[#f3c9d8] bg-white px-4 text-sm text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-[#f0a7c1]"
                 placeholder="Your name"
@@ -301,6 +320,7 @@ export default function ContactPage() {
                 className="min-h-[140px] rounded-2xl border border-[#f3c9d8] bg-white px-4 py-3 text-sm text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-[#f0a7c1]"
                 placeholder="Message"
                 name="message"
+                defaultValue={defaultMessage}
               />
               <button
                 className="mt-2 h-12 rounded-full bg-[#d96995] text-sm font-semibold text-white shadow-[0_16px_35px_rgba(214,105,149,0.35)] transition duration-300 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(214,105,149,0.45)]"

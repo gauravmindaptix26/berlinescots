@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "../i18n/LanguageProvider";
 
-const cards = [
+const fallbackCards = [
   {
     id: "card-1",
     titleKey: "selection.card1",
@@ -42,12 +42,22 @@ export default function SelectionSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [stride, setStride] = useState(0);
+  const [attendants, setAttendants] = useState<
+    {
+      id: string;
+      name: string;
+      age: number;
+      distance?: string;
+      defaultMedia?: { xs?: string; lg?: string; blurThumbnail?: string | null };
+    }[]
+  >([]);
   const pathname = usePathname();
   const localePrefix = useMemo(() => {
     if (pathname?.startsWith("/en")) return "/en";
     if (pathname?.startsWith("/de")) return "/de";
     return "/de";
   }, [pathname]);
+  const language = localePrefix.startsWith("/en") ? "en" : "de";
 
   const updateStride = useCallback(() => {
     const container = scrollerRef.current;
@@ -64,6 +74,23 @@ export default function SelectionSection() {
     window.addEventListener("resize", updateStride);
     return () => window.removeEventListener("resize", updateStride);
   }, [updateStride]);
+
+  useEffect(() => {
+    let active = true;
+    fetch(`/api/attendants?limit=8&language=${language}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!active) return;
+        setAttendants(Array.isArray(data?.items) ? data.items : []);
+      })
+      .catch(() => {
+        if (!active) return;
+        setAttendants([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [language]);
 
   const handleScroll = () => {
     if (!scrollerRef.current || !stride) return;
@@ -113,36 +140,54 @@ export default function SelectionSection() {
           onScroll={handleScroll}
           className="no-scrollbar flex gap-6 overflow-x-auto scroll-smooth pb-6 pt-2"
         >
-          {cards.map((card) => (
-            <article
-              key={card.id}
-              data-card="true"
-              className="min-w-[260px] shrink-0 space-y-4 rounded-[24px] bg-black sm:min-w-[300px] lg:min-w-[320px]"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] shadow-[0_20px_45px_rgba(0,0,0,0.5)]">
-                <Image
-                  src={card.src}
-                  alt={t(card.titleKey)}
-                  className="object-cover"
-                  fill
-                  sizes="(max-width: 1024px) 80vw, 320px"
-                />
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-base font-semibold text-white sm:text-lg">
-                  {t(card.titleKey)}
-                </h3>
-                <p className="text-xs font-semibold text-white/70">
-                  {t(card.statusKey)}
-                </p>
-                <p className="text-xl font-semibold text-white">{card.price}</p>
-              </div>
-            </article>
-          ))}
+          {(attendants.length ? attendants : fallbackCards).map((card) => {
+            const image =
+              "defaultMedia" in card ? card.defaultMedia?.lg || card.defaultMedia?.xs : card.src;
+            const blur =
+              "defaultMedia" in card ? card.defaultMedia?.blurThumbnail ?? undefined : undefined;
+            const title =
+              "name" in card ? `${card.name}, ${card.age}` : t(card.titleKey);
+            const subtitle =
+              "distance" in card && card.distance
+                ? `Distance ${card.distance} km`
+                : t("selection.available");
+            return (
+              <article
+                key={"id" in card ? card.id : card.id}
+                data-card="true"
+                className="min-w-[260px] shrink-0 space-y-4 rounded-[24px] bg-black sm:min-w-[300px] lg:min-w-[320px]"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] shadow-[0_20px_45px_rgba(0,0,0,0.5)]">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={title}
+                      className="object-cover"
+                      fill
+                      sizes="(max-width: 1024px) 80vw, 320px"
+                      placeholder={blur ? "blur" : "empty"}
+                      blurDataURL={blur}
+                    />
+                  ) : null}
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-base font-semibold text-white sm:text-lg">
+                    {title}
+                  </h3>
+                  <p className="text-xs font-semibold text-white/70">
+                    {subtitle}
+                  </p>
+                  <p className="text-xl font-semibold text-white">
+                    {"price" in card ? card.price : "Available"}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            {cards.map((card, index) => (
+            {(attendants.length ? attendants : fallbackCards).map((card, index) => (
               <button
                 key={card.id}
                 className={`h-2.5 w-2.5 rounded-full transition ${

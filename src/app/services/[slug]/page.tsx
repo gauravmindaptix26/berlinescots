@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
 import FooterSection from "../../../components/FooterSection";
+import AttendantsSection from "../../../components/AttendantsSection";
 import HighClassPage from "../../../components/services/HighClassPage";
 import MittePage from "../../../components/services/MittePage";
 import BusinessPage from "../../../components/services/BusinessPage";
@@ -80,9 +82,11 @@ type ServiceSlug = keyof typeof services;
 export default async function ServicePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale?: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const language = locale?.startsWith("en") ? "en" : "de";
+  const localePrefix = language === "en" ? "/en" : "/de";
   const service = services[slug as ServiceSlug];
   const isServiceBerlin = slug === "escort-service-berlin";
   const isHighClass = slug === "high-class-escort-berlin";
@@ -137,18 +141,18 @@ export default async function ServicePage({
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-4 pt-2">
-                    <button
+                    <Link
                       className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
-                      type="button"
+                      href={`${localePrefix}/booking-guidelines`}
                     >
                       Start Booking
-                    </button>
-                    <button
+                    </Link>
+                    <Link
                       className="rounded-full border border-[var(--line)] bg-white px-7 py-3 text-sm font-semibold text-black/80 transition hover:border-black/30"
-                      type="button"
+                      href={`${localePrefix}/contact`}
                     >
                       Speak to Concierge
-                    </button>
+                    </Link>
                   </div>
                   <div className="flex flex-wrap gap-8 pt-4 text-sm font-semibold text-black/60">
                     <span>Encrypted Requests</span>
@@ -205,18 +209,18 @@ export default async function ServicePage({
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
-                  <button
+                  <Link
                     className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
-                    type="button"
+                    href={`${localePrefix}/booking-guidelines`}
                   >
                     Start Booking
-                  </button>
-                  <button
+                  </Link>
+                  <Link
                     className="rounded-full border border-[var(--line)] bg-white px-7 py-3 text-sm font-semibold text-black/80 transition hover:border-black/30"
-                    type="button"
+                    href={`${localePrefix}/contact`}
                   >
                     Speak to Concierge
-                  </button>
+                  </Link>
                 </div>
                 <div className="flex flex-wrap gap-8 pt-4 text-sm font-semibold text-black/60">
                   <span>Encrypted Requests</span>
@@ -305,12 +309,12 @@ export default async function ServicePage({
                   ))}
                 </div>
                 <div className="mt-6 flex items-center gap-4">
-                  <button
+                  <Link
                     className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                    type="button"
+                    href={`${localePrefix}/booking-guidelines`}
                   >
                     Explore Service
-                  </button>
+                  </Link>
                   <span className="text-sm font-semibold text-black/60">
                     Avg response under 10 min
                   </span>
@@ -517,12 +521,12 @@ export default async function ServicePage({
                   </div>
                 ))}
               </div>
-              <button
+              <Link
                 className="mt-6 w-full rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                type="button"
+                href={`${localePrefix}/contact`}
               >
                 Check Availability
-              </button>
+              </Link>
             </div>
           </section>
 
@@ -620,6 +624,11 @@ export default async function ServicePage({
             </div>
           </section>
 
+          <AttendantsSection
+            title="Profiles available now"
+            subtitle="Verified attendants from our concierge"
+          />
+
           <section
             className="fade-in-up rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_22px_50px_rgba(0,0,0,0.1)] lg:p-12"
             style={{ animationDelay: "0.3s" }}
@@ -635,18 +644,18 @@ export default async function ServicePage({
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
-                <button
+                <Link
                   className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
-                  type="button"
+                  href={`${localePrefix}/booking-guidelines`}
                 >
                   Book a Session
-                </button>
-                <button
+                </Link>
+                <Link
                   className="rounded-full border border-[var(--line)] bg-white px-7 py-3 text-sm font-semibold text-black/80 transition hover:border-black/30"
-                  type="button"
+                  href={`${localePrefix}/contact`}
                 >
                   WhatsApp Concierge
-                </button>
+                </Link>
               </div>
             </div>
           </section>

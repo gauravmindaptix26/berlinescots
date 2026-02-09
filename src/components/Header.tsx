@@ -71,11 +71,15 @@ export default function Header({
         isDark ? "text-white" : "text-black"
       }`}
     >
-      <div className="text-3xl font-semibold text-[var(--accent)] sm:text-4xl">
-        <span style={{ fontFamily: "var(--font-script)" }}>
-          EscortBerlin.de
-        </span>
-      </div>
+        <a
+          href={`${localePrefix}/`}
+          className="text-3xl font-semibold !text-[var(--accent)] sm:text-4xl"
+          aria-label="EscortBerlin.de home"
+        >
+          <span style={{ fontFamily: "var(--font-script)" }}>
+            EscortBerlin.de
+          </span>
+        </a>
       <button
         className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] md:hidden ${
           isDark

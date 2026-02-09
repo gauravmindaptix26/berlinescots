@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Header from "../Header";
 import FooterSection from "../FooterSection";
+import AttendantsSection from "../AttendantsSection";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -98,12 +99,12 @@ export default function BusinessPage() {
                   </Link>
                 </div>
               </div>
-              <div className="relative h-[360px] sm:h-[420px]">
+              <div className="relative grid gap-4 sm:block sm:h-[420px]">
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, ease }}
-                  className="absolute left-0 top-8 w-[58%] overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
+                  className="relative w-full overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:absolute sm:left-0 sm:top-8 sm:w-[58%]"
                 >
                   <div className="relative aspect-[3/4]">
                     <Image
@@ -120,7 +121,7 @@ export default function BusinessPage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, ease, delay: 0.05 }}
-                  className="absolute right-0 top-0 w-[52%] overflow-hidden rounded-[26px] border border-white/10 bg-white/5 shadow-[0_28px_70px_rgba(0,0,0,0.4)]"
+                  className="relative w-full overflow-hidden rounded-[26px] border border-white/10 bg-white/5 shadow-[0_28px_70px_rgba(0,0,0,0.4)] sm:absolute sm:right-0 sm:top-0 sm:w-[52%]"
                 >
                   <div className="relative aspect-[4/5]">
                     <Image
@@ -137,7 +138,7 @@ export default function BusinessPage() {
                   initial={{ opacity: 0, y: -24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.1 }}
-                  className="absolute bottom-0 right-16 w-[48%] overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-[0_26px_60px_rgba(0,0,0,0.35)]"
+                  className="relative w-full overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-[0_26px_60px_rgba(0,0,0,0.35)] sm:absolute sm:bottom-0 sm:right-16 sm:w-[48%]"
                 >
                   <div className="relative aspect-[4/3]">
                     <Image
@@ -340,6 +341,11 @@ export default function BusinessPage() {
             </div>
           </motion.section>
 
+          <AttendantsSection
+            title="Profiles available now"
+            subtitle="Verified attendants from our concierge"
+          />
+
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -361,10 +367,12 @@ export default function BusinessPage() {
                 className="group relative overflow-hidden rounded-full border border-[#f2a3bf]/50 bg-black px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
                 href={`${localePrefix}/booking-guidelines`}
               >
-                <span className="absolute inset-0 opacity-0 blur-xl transition group-hover:opacity-100">
+                <span className="absolute inset-0 z-0 opacity-0 blur-xl transition group-hover:opacity-100">
                   <span className="absolute inset-0 bg-gradient-to-r from-[#f2a3bf] via-[#f4b6cf] to-[#f6cfe0] opacity-55" />
                 </span>
-                <span className="relative">Book Executive Session</span>
+                <span className="relative z-10 text-white">
+                  Book Executive Session
+                </span>
               </Link>
             </div>
           </motion.section>

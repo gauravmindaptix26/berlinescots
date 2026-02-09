@@ -5,7 +5,6 @@ import {
   Locale,
   locales,
 } from "../../i18n/translations";
-import { LanguageProvider } from "../../i18n/LanguageProvider";
 
 export default async function LocaleLayout({
   children,
@@ -37,7 +36,7 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <LanguageProvider initialLocale={safeLocale}>{children}</LanguageProvider>
+      {children}
       <Script
         id="org-jsonld"
         type="application/ld+json"

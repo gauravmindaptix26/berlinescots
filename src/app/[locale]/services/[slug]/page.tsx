@@ -110,9 +110,19 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleServicePage(props: {
-  params: Promise<{ slug: string }>;
+export default async function LocaleServicePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+  searchParams?: Promise<{ page?: string }>;
 }) {
-  return <ServicePage {...props} />;
+  const { slug, locale } = await params;
+  return (
+    <ServicePage
+      params={Promise.resolve({ slug, locale })}
+      searchParams={searchParams}
+    />
+  );
 }
 
