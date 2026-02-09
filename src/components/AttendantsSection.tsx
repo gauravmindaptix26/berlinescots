@@ -180,7 +180,7 @@ export default function AttendantsSection({
                   <div className="flex items-center justify-between text-sm font-semibold text-black/70">
                     <span>Available on request</span>
                     <Link
-                      className="text-[var(--accent)]"
+                      className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-5 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(207,31,109,0.32)] transition hover:-translate-y-0.5"
                       href={`${localePrefix}/contact?attendant=${encodeURIComponent(
                         profile.name
                       )}${slugValue ? `&slug=${slugValue}` : ""}${

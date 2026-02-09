@@ -264,20 +264,18 @@ export default function Header({
       <div className="flex flex-wrap items-center gap-2">
         <span className="sr-only">{t("nav.language")}</span>
         {(
-          [
-            {
-              key: "de",
-              label: "Deutsch",
-              flag: "🇩🇪",
-              visible: true,
-            },
-            {
-              key: "en",
-              label: "English",
-              flag: "🇬🇧",
-              visible: false,
-            },
-          ] as const
+            [
+              {
+                key: "de",
+                label: "Deutsch",
+                visible: true,
+              },
+              {
+                key: "en",
+                label: "English",
+                visible: false,
+              },
+            ] as const
         )
           .filter((item) => item.visible)
           .map((item) => (
@@ -293,11 +291,17 @@ export default function Header({
               aria-pressed={locale.startsWith(item.key)}
               onClick={() => switchLocale(item.key)}
             >
-              <span aria-hidden="true">{item.flag}</span>
-              <span className="hidden sm:inline">{item.label}</span>
+              <span
+                aria-hidden="true"
+                className="h-5 w-5 rounded-full border border-black/10 bg-[linear-gradient(180deg,#000_0%,#000_33%,#dd1c24_33%,#dd1c24_66%,#ffce00_66%,#ffce00_100%)]"
+              />
+              <span className="text-xs font-bold tracking-[0.2em]">DE</span>
             </button>
           ))}
       </div>
     </header>
   );
 }
+
+
+
