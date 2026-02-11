@@ -143,7 +143,7 @@ export default async function ServicePage({
                   </div>
                   <div className="flex flex-wrap gap-4 pt-2">
                     <Link
-                      className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
+                      className="rounded-full bg-[#CF1C72] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,28,114,0.35)] transition hover:-translate-y-0.5"
                       href={`${localePrefix}/booking-guidelines`}
                     >
                       Start Booking
@@ -211,7 +211,7 @@ export default async function ServicePage({
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
                   <Link
-                    className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
+                    className="rounded-full bg-[#CF1C72] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,28,114,0.35)] transition hover:-translate-y-0.5"
                     href={`${localePrefix}/booking-guidelines`}
                   >
                     Start Booking
@@ -522,12 +522,6 @@ export default async function ServicePage({
                   </div>
                 ))}
               </div>
-              <Link
-                className="mt-6 w-full rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                href={`${localePrefix}/contact`}
-              >
-                Check Availability
-              </Link>
             </div>
           </section>
 
@@ -648,7 +642,7 @@ export default async function ServicePage({
               </div>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,31,109,0.35)] transition hover:-translate-y-0.5"
+                  className="rounded-full bg-[#CF1C72] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(207,28,114,0.35)] transition hover:-translate-y-0.5"
                   href={`${localePrefix}/booking-guidelines`}
                 >
                   Book a Session

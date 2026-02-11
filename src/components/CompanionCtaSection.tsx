@@ -30,7 +30,7 @@ export default function CompanionCtaSection() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
-            className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(207,31,109,0.35)]"
+            className="rounded-full bg-[#CF1C72] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(207,28,114,0.35)]"
             href={`${localePrefix}/booking-guidelines`}
           >
             {t("cta.book")}

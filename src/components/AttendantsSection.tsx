@@ -127,10 +127,28 @@ export default function AttendantsSection({
               : null;
             const slugValue = profile.slug;
             const idValue = profile.id;
+            const profileUrl = slugValue
+              ? `https://bb-escort.de/escort-dame/${slugValue}`
+              : null;
             return (
               <article
                 key={`${profile.name}-${profile.id ?? profile.slug ?? "card"}`}
-                className="group overflow-hidden rounded-[24px] border border-black/10 bg-white shadow-[0_22px_55px_rgba(0,0,0,0.16)]"
+                className={`group overflow-hidden rounded-[24px] border border-black/10 bg-white shadow-[0_22px_55px_rgba(0,0,0,0.16)] ${
+                  profileUrl ? "cursor-pointer" : ""
+                }`}
+                onClick={() => {
+                  if (!profileUrl) return;
+                  window.open(profileUrl, "_blank", "noopener,noreferrer");
+                }}
+                onKeyDown={(event) => {
+                  if (!profileUrl) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    window.open(profileUrl, "_blank", "noopener,noreferrer");
+                  }
+                }}
+                role={profileUrl ? "button" : undefined}
+                tabIndex={profileUrl ? 0 : undefined}
               >
                 <div className="relative aspect-[4/5]">
                   {image ? (
@@ -182,12 +200,15 @@ export default function AttendantsSection({
                   <div className="flex items-center justify-between text-sm font-semibold text-black/70">
                     <span>Available on request</span>
                     <Link
-                      className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-5 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(207,31,109,0.32)] transition hover:-translate-y-0.5"
+                      className="rounded-full bg-[#CF1C72] px-5 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(207,28,114,0.32)] transition hover:-translate-y-0.5"
                       href={`${localePrefix}/contact?attendant=${encodeURIComponent(
                         profile.name
                       )}${slugValue ? `&slug=${slugValue}` : ""}${
                         idValue ? `&id=${idValue}` : ""
                       }`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                      }}
                     >
                       Book
                     </Link>

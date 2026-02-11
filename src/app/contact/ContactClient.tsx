@@ -203,11 +203,11 @@ export default function ContactClient() {
                   onClick={() => setActiveMethod(index)}
                   className={`flex items-center gap-5 rounded-3xl border p-5 text-left transition ${
                     index === activeMethod
-                      ? "border-[#d96995] bg-[#fff2f8] shadow-[0_25px_60px_rgba(214,105,149,0.22)]"
-                      : "border-[#f3c9d8] bg-white hover:border-[#d96995]"
+                      ? "border-[#CF1C72] bg-[#fff2f8] shadow-[0_25px_60px_rgba(214,105,149,0.22)]"
+                      : "border-[#f3c9d8] bg-white hover:border-[#CF1C72]"
                   }`}
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#f3c9d8] bg-white text-sm font-semibold text-[#d96995]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#f3c9d8] bg-white text-sm font-semibold text-[#CF1C72]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -237,7 +237,7 @@ export default function ContactClient() {
                     onClick={() => setActiveMethod(index)}
                     className={`relative min-h-[120px] overflow-hidden rounded-2xl border transition ${
                       index === activeMethod
-                        ? "border-[#d96995]"
+                        ? "border-[#CF1C72]"
                         : "border-[#f3c9d8]"
                     }`}
                   >
@@ -326,7 +326,7 @@ export default function ContactClient() {
                 defaultValue={defaultMessage}
               />
               <button
-                className="mt-2 h-12 rounded-full bg-[#d96995] text-sm font-semibold text-white shadow-[0_16px_35px_rgba(214,105,149,0.35)] transition duration-300 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(214,105,149,0.45)]"
+                className="mt-2 h-12 rounded-full bg-[#CF1C72] text-sm font-semibold text-white shadow-[0_16px_35px_rgba(207,28,114,0.35)] transition duration-300 hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(207,28,114,0.45)]"
                 type="submit"
               >
                 Send Secure Request
@@ -369,8 +369,8 @@ export default function ContactClient() {
                     onClick={() => setActiveSlide(index)}
                     className={`rounded-2xl border p-4 text-left transition ${
                       index === activeSlide
-                        ? "border-[#d96995] bg-white shadow-[0_20px_45px_rgba(214,105,149,0.2)]"
-                        : "border-[#f3c9d8] bg-white/70 hover:border-[#d96995]"
+                        ? "border-[#CF1C72] bg-white shadow-[0_20px_45px_rgba(214,105,149,0.2)]"
+                        : "border-[#f3c9d8] bg-white/70 hover:border-[#CF1C72]"
                     }`}
                   >
                     <p className="text-xs uppercase tracking-[0.3em] text-[#d96995]">
@@ -403,7 +403,7 @@ export default function ContactClient() {
                       onClick={() => setActiveSlide(index)}
                       className={`h-2.5 w-2.5 rounded-full transition ${
                         index === activeSlide
-                          ? "bg-[#d96995]"
+                          ? "bg-[#CF1C72]"
                           : "bg-[#f3c9d8]"
                       }`}
                       aria-label={`Show slide ${index + 1}`}
@@ -419,7 +419,7 @@ export default function ContactClient() {
                           gallerySlides.length,
                       )
                     }
-                    className="rounded-full border border-[#f3c9d8] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/70 transition hover:border-[#d96995] hover:text-black"
+                    className="rounded-full border border-[#f3c9d8] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/70 transition hover:border-[#CF1C72] hover:text-black"
                   >
                     Prev
                   </button>
@@ -428,7 +428,7 @@ export default function ContactClient() {
                     onClick={() =>
                       setActiveSlide((activeSlide + 1) % gallerySlides.length)
                     }
-                    className="rounded-full border border-[#f3c9d8] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/70 transition hover:border-[#d96995] hover:text-black"
+                    className="rounded-full border border-[#f3c9d8] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/70 transition hover:border-[#CF1C72] hover:text-black"
                   >
                     Next
                   </button>

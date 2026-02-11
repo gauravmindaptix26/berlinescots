@@ -28,7 +28,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Link
-            className="rounded-full bg-gradient-to-r from-[#d21a73] via-[#c6206f] to-[#3b1d6e] px-7 py-3 text-base font-semibold text-white shadow-[0_10px_25px_rgba(207,31,109,0.35)]"
+            className="rounded-full bg-[#CF1C72] px-7 py-3 text-base font-semibold text-white shadow-[0_10px_25px_rgba(207,28,114,0.35)]"
             href={`${localePrefix}/services/escort-service-berlin`}
           >
             {t("hero.browse")}
