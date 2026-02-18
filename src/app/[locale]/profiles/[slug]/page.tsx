@@ -65,11 +65,11 @@ export default async function InternalProfilePage({
   const travelItems = splitValues(profile.travelCosts);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,#ffd5e8_0%,#ffe8f3_32%,#f7dce9_66%,#efcadc_100%)] text-black">
+    <div className="min-h-screen bg-transparent text-black">
       <div className="mx-auto flex min-h-screen max-w-[1240px] flex-col gap-10 px-6 pb-16 pt-10 sm:px-10 lg:px-14">
         <Header tone="light" />
 
-        <main className="overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(145deg,#090909_0%,#07090f_48%,#080808_100%)] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+        <main className="overflow-hidden rounded-[34px] border border-[var(--accent-soft)]/20 bg-[linear-gradient(145deg,#090909_0%,#07090f_48%,#080808_100%)] shadow-[0_30px_90px_rgba(0,0,0,0.45),0_16px_50px_rgba(207,31,109,0.22)]">
           <div className="relative grid min-h-[520px] gap-0 lg:grid-cols-[1.15fr_1fr]">
             <div className="relative flex items-center justify-center border-b border-white/10 bg-[radial-gradient(circle_at_35%_40%,rgba(207,31,109,0.2)_0%,rgba(0,0,0,0.92)_62%)] p-8 lg:border-b-0 lg:border-r lg:border-r-white/10">
               {profile.image ? (
