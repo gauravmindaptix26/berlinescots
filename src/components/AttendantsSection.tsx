@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type AttendantMedia = {
   xs?: string;
@@ -47,6 +47,7 @@ export default function AttendantsSection({
 }: AttendantsSectionProps) {
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams();
+  const router = useRouter();
   const language = pathname.startsWith("/en") ? "en" : "de";
   const localePrefix = language === "en" ? "/en" : "/de";
   const currentPage = Math.max(
@@ -128,7 +129,7 @@ export default function AttendantsSection({
             const slugValue = profile.slug;
             const idValue = profile.id;
             const profileUrl = slugValue
-              ? `https://bb-escort.de/escort-dame/${slugValue}`
+              ? `${localePrefix}/profiles/${encodeURIComponent(slugValue)}`
               : null;
             return (
               <article
@@ -138,13 +139,13 @@ export default function AttendantsSection({
                 }`}
                 onClick={() => {
                   if (!profileUrl) return;
-                  window.open(profileUrl, "_blank", "noopener,noreferrer");
+                  router.push(profileUrl);
                 }}
                 onKeyDown={(event) => {
                   if (!profileUrl) return;
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
-                    window.open(profileUrl, "_blank", "noopener,noreferrer");
+                    router.push(profileUrl);
                   }
                 }}
                 role={profileUrl ? "button" : undefined}

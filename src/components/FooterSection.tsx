@@ -3,109 +3,143 @@
 import { useTranslations } from "../i18n/LanguageProvider";
 
 export default function FooterSection() {
-  const { t, locale } = useTranslations();
+  const { locale } = useTranslations();
   const localePrefix = locale.startsWith("en") ? "/en" : "/de";
-  const isEn = locale.startsWith("en");
-
-  const footerColumns = [
-    {
-      title: isEn ? "Services" : "Services",
-      items: [
-        {
-          label: isEn ? "Escort Agency Berlin" : "Escort Agentur Berlin",
-          href: `${localePrefix}/services/escort-agentur-berlin`,
-        },
-        {
-          label: isEn ? "Escort Service Berlin" : "Escort Service Berlin",
-          href: `${localePrefix}/services/escort-service-berlin`,
-        },
-        {
-          label: isEn ? "High Class Escort Berlin" : "High Class Escort Berlin",
-          href: `${localePrefix}/services/high-class-escort-berlin`,
-        },
-        {
-          label: isEn ? "Escort Berlin Mitte" : "Escort Berlin Mitte",
-          href: `${localePrefix}/services/escort-berlin-mitte`,
-        },
-        {
-          label: isEn ? "Business Escort Berlin" : "Business Escort Berlin",
-          href: `${localePrefix}/services/business-escort-berlin`,
-        },
-      ],
-    },
-    {
-      title: isEn ? "Company" : "Unternehmen",
-      items: [
-        { label: isEn ? "About" : "Über uns", href: `${localePrefix}/about` },
-        {
-          label: isEn ? "Contact" : "Kontakt",
-          href: `${localePrefix}/contact`,
-        },
-        {
-          label: isEn ? "Booking Guidelines" : "Buchungsrichtlinien",
-          href: `${localePrefix}/booking-guidelines`,
-        },
-      ],
-    },
-    {
-      title: isEn ? "Legal" : "Rechtliches",
-      items: [
-        { label: t("footer.legal1"), href: `${localePrefix}/privacy` },
-        { label: t("footer.legal2"), href: `${localePrefix}/terms` },
-        { label: t("footer.legal3"), href: `${localePrefix}/cookies` },
-      ],
-    },
-  ];
-
-  const legalLinks = [
-    { label: t("footer.legal1"), href: `${localePrefix}/privacy` },
-    { label: t("footer.legal2"), href: `${localePrefix}/terms` },
-    { label: t("footer.legal3"), href: `${localePrefix}/cookies` },
-    { label: t("footer.legal4"), href: `${localePrefix}/booking-guidelines` },
-  ];
 
   return (
-    <footer className="perf-section bg-black py-16 text-white">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-12 px-6 sm:px-10 lg:px-16">
-        <div className="grid gap-10 border-t border-white/10 pt-10 lg:grid-cols-[0.6fr_3.4fr]">
-          <div className="text-2xl font-semibold text-[var(--accent)]">
-            <span style={{ fontFamily: "var(--font-script)" }}>
-              EscortBerlin.de
-            </span>
-            <p className="mt-3 text-sm font-normal text-white/80">
-              {isEn
-                ? "Discreet, premium companionship curated for Berlin."
-                : "Diskrete Premium-Begleitung, kuratiert für Berlin."}
+    <footer className="perf-section relative overflow-hidden border-t border-[var(--accent)]/30 bg-black text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-28 top-[-120px] h-[300px] w-[300px] rounded-full bg-[var(--accent)]/20 blur-3xl" />
+        <div className="absolute right-[-140px] top-[-90px] h-[280px] w-[280px] rounded-full bg-[var(--accent-soft)]/20 blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/50 to-transparent" />
+      </div>
+
+      <div className="relative mx-auto max-w-[1280px] px-6 py-7 sm:px-10 lg:px-12">
+        <div className="grid gap-7 border-b border-white/10 pb-6 md:grid-cols-[1.25fr_52px_0.8fr_0.8fr]">
+          <div>
+            <a
+              href={`${localePrefix}/`}
+              className="inline-block text-3xl font-semibold !text-[var(--accent)] sm:text-4xl"
+              aria-label="EscortBerlin.de home"
+            >
+              <span style={{ fontFamily: "var(--font-script)" }}>
+                EscortBerlin.de
+              </span>
+            </a>
+            <p className="mt-3 max-w-[420px] text-sm text-white/70">
+              Discreet premium companionship in Berlin
             </p>
           </div>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {footerColumns.map((column) => (
-              <div key={column.title} className="space-y-4 text-sm">
-                <p className="text-lg font-semibold text-white">
-                  {column.title}
-                </p>
-                <ul className="space-y-3 text-base text-white">
-                  {column.items.map((item) => (
-                    <li key={item.label}>
-                      <a className="cursor-pointer" href={item.href}>
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+          <div className="hidden items-start justify-center md:flex">
+            <div className="relative flex h-full min-h-[150px] flex-col items-center">
+              <span className="h-[58px] w-px bg-gradient-to-b from-transparent via-[var(--accent)]/70 to-transparent" />
+              <span className="my-3 h-2.5 w-2.5 rotate-45 border border-[var(--accent-soft)]/80 bg-transparent" />
+              <span className="h-[58px] w-px bg-gradient-to-b from-transparent via-[var(--accent)]/70 to-transparent" />
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[var(--accent-soft)]">
+              Navigation
+            </p>
+            <ul className="mt-4 space-y-2.5">
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/`}
+                >
+                  Home
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/services/escort-agentur-berlin`}
+                >
+                  Escort Agency
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/about`}
+                >
+                  About Us
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/contact`}
+                >
+                  Contact
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[var(--accent-soft)]">
+              Legal
+            </p>
+            <ul className="mt-4 space-y-2.5">
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/privacy`}
+                >
+                  Privacy Policy
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/terms`}
+                >
+                  Terms &amp; Conditions
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group relative inline-block w-fit text-[16px] uppercase tracking-[0.12em] text-white/85 transition-colors duration-300 hover:text-[var(--accent-soft)] sm:text-[17px]"
+                  href={`${localePrefix}/cookies`}
+                >
+                  Cookie Settings
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/10 pt-6 text-sm text-white">
-          <div className="flex flex-wrap items-center gap-6">
-            {legalLinks.map((item) => (
-              <a key={item.label} className="cursor-pointer" href={item.href}>
-                {item.label}
-              </a>
-            ))}
+
+        <div className="relative mt-5 flex flex-col gap-3 text-sm text-white/65 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-[13px] tracking-[0.2em] text-[var(--accent-soft)]">© 2025 ESCORTBERLIN.DE</p>
+            <p className="mt-1 text-[16px] text-white/60">
+              Discreet premium companionship in Berlin
+            </p>
           </div>
-          <div className="text-white/70">© 2025 EscortBerlin.de</div>
+          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-[var(--accent-soft)]/80">
+            <span>Privacy</span>
+            <span className="text-[var(--accent)]">•</span>
+            <span>Terms</span>
+            <span className="text-[var(--accent)]">•</span>
+            <span>Cookies</span>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-9 right-0 hidden select-none text-[210px] font-semibold uppercase leading-none text-[var(--accent)]/12 md:block"
+            style={{ fontFamily: "var(--font-script)" }}
+          >
+            EB
+          </div>
         </div>
       </div>
     </footer>
